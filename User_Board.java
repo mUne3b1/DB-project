@@ -63,7 +63,7 @@ public class User_Board {
             }
             if(e.getSource() == signIn_button){
                 frame.dispose();
-                Sign_In_GUI sign_in_gui = new Sign_In_GUI();
+                User_Sign_In_GUI userSign_in_gui = new User_Sign_In_GUI();
             }
         }
     }

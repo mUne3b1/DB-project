@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Sign_Up_GUI {
+public class User_Sign_Up_GUI {
     private JFrame frame;
     private JPanel panel;
     private JLabel main_label;
@@ -16,7 +16,7 @@ public class Sign_Up_GUI {
     private JButton signup_button;
     private JButton clear_button;
 
-    public Sign_Up_GUI() {
+    public User_Sign_Up_GUI() {
         frame = new JFrame("Vehicle Management System");
         panel = new JPanel(null);
 
