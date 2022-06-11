@@ -30,6 +30,7 @@ public class User_Board {
         signUp_button.setBounds(300, 400, 400, 100);
         signUp_button.setBackground(Color.CYAN);
         signUp_button.setFont(new Font("Aerial", Font.BOLD, 30));
+        signUp_button.addActionListener(new Handler());
 
         back_button = new JButton("Back");
         back_button.setBounds(410, 600, 180, 60);
@@ -64,6 +65,10 @@ public class User_Board {
             if(e.getSource() == signIn_button){
                 frame.dispose();
                 User_Sign_In_GUI userSign_in_gui = new User_Sign_In_GUI();
+            }
+            if (e.getSource() == signUp_button) {
+                frame.dispose();
+                User_Sign_Up_GUI user_sign_up_gui = new User_Sign_Up_GUI();
             }
         }
     }

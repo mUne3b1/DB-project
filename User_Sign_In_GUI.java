@@ -85,7 +85,7 @@ public class User_Sign_In_GUI {
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == back_button){
                 frame.dispose();
-                Main_DashBoard main_dashBoard = new Main_DashBoard();
+                User_Board user_board = new User_Board();
             }
             if(e.getSource() == signin_button){
 

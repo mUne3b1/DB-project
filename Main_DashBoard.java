@@ -8,7 +8,7 @@ public class Main_DashBoard {
     private JPanel panel;
 
     private JButton user_button;
-    private JButton password_button;
+    private JButton admin_button;
     private JButton back_button;
     private JLabel main_label;
 
@@ -27,10 +27,11 @@ public class Main_DashBoard {
         user_button.setFont(new Font("Aerial", Font.BOLD, 30));
         user_button.addActionListener(new Handler());
 
-        password_button = new JButton("Admin");
-        password_button.setBounds(300, 400, 400, 100);
-        password_button.setBackground(Color.CYAN);
-        password_button.setFont(new Font("Aerial", Font.BOLD, 30));
+        admin_button = new JButton("Admin");
+        admin_button.setBounds(300, 400, 400, 100);
+        admin_button.setBackground(Color.CYAN);
+        admin_button.setFont(new Font("Aerial", Font.BOLD, 30));
+        admin_button.addActionListener(new Handler());
 
         back_button = new JButton("Back");
         back_button.setBounds(410, 600, 180, 60);
@@ -44,7 +45,7 @@ public class Main_DashBoard {
 
         panel.add(main_label);
         panel.add(user_button);
-        panel.add(password_button);
+        panel.add(admin_button);
         panel.add(back_button);
         frame.add(panel);
         frame.setVisible(true);
@@ -65,6 +66,11 @@ public class Main_DashBoard {
             if(e.getSource() == user_button){
                 frame.dispose();
                 User_Board user_board = new User_Board();
+            }
+            if(e.getSource() == admin_button){
+                System.out.println("Done");
+                frame.dispose();
+                Admin_Login admin_login = new Admin_Login();
             }
         }
     }
