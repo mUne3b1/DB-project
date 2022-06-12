@@ -4,8 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Admin_Login {
-    JFrame frame = new JFrame();
-    JPanel panel = new JPanel();
+    JFrame frame;
+    JPanel panel;
     JLabel admin_login_label;
     JLabel passcode_label;
     JTextField passcode_field;
@@ -14,8 +14,8 @@ public class Admin_Login {
 
 
     public Admin_Login(){
-        JFrame frame = new JFrame("Vehicle Showroom Management System");
-        JPanel panel = new JPanel(null);
+        frame = new JFrame("Vehicle Showroom Management System");
+        panel = new JPanel(null);
 
         admin_login_label = new JLabel("Vehicle Showroom Management System");
         admin_login_label.setFont(new Font("Serif", Font.BOLD, 35));
@@ -62,12 +62,13 @@ public class Admin_Login {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            if(e.getSource() == login_button){
+                frame.dispose();
+                Admin_Dashboard admin_dashboard = new Admin_Dashboard();
+            }
             if(e.getSource() == back_button){
                 frame.dispose();
-                User_Board user_board = new User_Board();
-            }
-            if(e.getSource() == login_button){
-
+                Main_DashBoard main_dashBoard = new Main_DashBoard();
             }
         }
     }
