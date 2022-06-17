@@ -65,7 +65,7 @@ public class updateCarsGUI {
             }
             if(e.getSource() == back_button){
                 frame.dispose();
-                Main_DashBoard main_dashBoard = new Main_DashBoard();
+                Admin_Manage_Car_Board main_dashBoard = new Admin_Manage_Car_Board();
             }
         }
     }

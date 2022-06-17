@@ -67,7 +67,7 @@ public class UpadteMotorbikesGUI {
             }
             if (e.getSource() == back_button) {
                 frame.dispose();
-                Main_DashBoard main_dashBoard = new Main_DashBoard();
+                Admin_Manage_Bike_Board m = new Admin_Manage_Bike_Board();
             }
         }
     }}
