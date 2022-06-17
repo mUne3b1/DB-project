@@ -61,9 +61,8 @@ public class UpdateUsedPriceGUI {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == back_button) {
                 frame.dispose();
-                Main_DashBoard main_dashBoard = new Main_DashBoard();
+                UpdateUsedGUI  up = new UpdateUsedGUI();
             }
-
         }}}
 
 
