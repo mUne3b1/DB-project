@@ -13,7 +13,7 @@ public class AddNewCarPriecGUI {
 
     private JTextField update_price;
     public AddNewCarPriecGUI() {
-        frame = new JFrame("Update car  price");
+        frame = new JFrame("Update car price");
         panel = new JPanel(null);
         main_label = new JLabel("Update car price");
         main_label.setFont(new Font("Serif", Font.BOLD, 45));

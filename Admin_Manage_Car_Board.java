@@ -77,9 +77,11 @@ public class Admin_Manage_Car_Board {
                 Admin_Add_Car_GUI admin_add_car_gui = new Admin_Add_Car_GUI();
             }
             if(e.getSource() == updatecar_button){
-
+                frame.dispose();
+                updateCarsGUI updateCarsGUI = new updateCarsGUI();
             }
             if (e.getSource() == viewcar_button) {
+                frame.dispose();
                 Admin_View_Car_GUI admin_view_car_gui = new Admin_View_Car_GUI();
             }
             if(e.getSource() == deletecar_button){

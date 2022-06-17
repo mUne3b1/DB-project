@@ -68,7 +68,7 @@ public class Admin_Add_Car_GUI {
         car_engine_field = new JTextField();
         car_engine_field.setBounds(400, 350, 350, 40);
 
-        car_price_label = new JLabel("Engine:");
+        car_price_label = new JLabel("Price:");
         car_price_label.setFont(new Font("", Font.BOLD, 25));
         car_price_label.setForeground(Color.CYAN);
         car_price_label.setBounds(230, 390, 700, 100);

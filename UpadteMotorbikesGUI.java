@@ -14,7 +14,7 @@ public class UpadteMotorbikesGUI {
     private JLabel main_label;
 
     public UpadteMotorbikesGUI() {
-        frame = new JFrame("Update Bike details");
+        frame = new JFrame("Vehicle Showroom Management System");
         panel = new JPanel(null);
         main_label = new JLabel("Update Bik details");
         main_label.setFont(new Font("Serif", Font.BOLD, 45));

@@ -14,7 +14,7 @@ public class UpdateUsedQuantityGUI {
 
     private JTextField update_price;
     public UpdateUsedQuantityGUI() {
-        frame = new JFrame("Update Used Vehicle  Quantity");
+        frame = new JFrame("Vehicle Showroom Management System");
         panel = new JPanel(null);
         main_label = new JLabel("Update Used Vehicle Quantity");
         main_label.setFont(new Font("Serif", Font.BOLD, 45));

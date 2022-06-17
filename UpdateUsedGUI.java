@@ -13,7 +13,7 @@ public class UpdateUsedGUI {
     private JLabel main_label;
 
     public UpdateUsedGUI() {
-        frame = new JFrame("Update Used Vehicle details");
+        frame = new JFrame("Vehicle Showroom Management System");
         panel = new JPanel(null);
         main_label = new JLabel("Update Used Vehicle details");
         main_label.setFont(new Font("Serif", Font.BOLD, 45));

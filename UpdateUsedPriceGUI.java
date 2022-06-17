@@ -13,7 +13,7 @@ public class UpdateUsedPriceGUI {
 
     private JTextField update_price;
     public UpdateUsedPriceGUI() {
-        frame = new JFrame("Update Used Vehicle  price");
+        frame = new JFrame("Vehicle Showroom Management System");
         panel = new JPanel(null);
         main_label = new JLabel("Update Used Vehicle price");
         main_label.setFont(new Font("Serif", Font.BOLD, 45));

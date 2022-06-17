@@ -13,7 +13,7 @@ public class updateCarsGUI {
     private JLabel main_label;
 
     public updateCarsGUI() {
-        frame = new JFrame("Update car details");
+        frame = new JFrame("Vehicle Showroom Management System");
         panel = new JPanel(null);
         main_label = new JLabel("Update car details");
         main_label.setFont(new Font("Serif", Font.BOLD, 45));
@@ -68,4 +68,5 @@ public class updateCarsGUI {
                 Main_DashBoard main_dashBoard = new Main_DashBoard();
             }
         }
-    }}
+    }
+}

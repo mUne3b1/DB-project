@@ -13,7 +13,7 @@ public class BikeAddNewPriceGUI {
 
     private JTextField update_price;
     public BikeAddNewPriceGUI() {
-        frame = new JFrame("Update Bike  price");
+        frame = new JFrame("Vehicle Showroom Management System");
         panel = new JPanel(null);
         main_label = new JLabel("Update Bike price");
         main_label.setFont(new Font("Serif", Font.BOLD, 45));

@@ -27,7 +27,7 @@ public class Admin_Delete_Car_GUI {
         main_label.setBounds(430, 20, 700, 100);
 
         info_area = new TextArea();
-        info_area.setBounds(0, 120, 1000, 450);
+        info_area.setBounds(0, 120, 1000, 470);
         info_area.setBackground(new Color(21, 40, 51));
         info_area.setForeground(Color.CYAN);
         info_area.setFont(new Font("SansSerif", Font.PLAIN, 18));
