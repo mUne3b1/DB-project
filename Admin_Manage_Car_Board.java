@@ -24,25 +24,25 @@ public class Admin_Manage_Car_Board {
         main_label.setBounds(430, 30, 700, 100);
 
 
-        addcar_button = new JButton("Add car");
+        addcar_button = new JButton("Add cars");
         addcar_button.setBounds(300, 130, 450, 90);
         addcar_button.setBackground(Color.CYAN);
         addcar_button.setFont(new Font("Aerial", Font.BOLD, 25));
         addcar_button.addActionListener(new Handler());
 
-        updatecar_button = new JButton("update car");
+        updatecar_button = new JButton("Update cars");
         updatecar_button.setBounds(300, 270, 450, 90);
         updatecar_button.setBackground(Color.CYAN);
         updatecar_button.setFont(new Font("Aerial", Font.BOLD, 25));
         updatecar_button.addActionListener(new Handler());
 
-        viewcar_button = new JButton("Manage Sales");
+        viewcar_button = new JButton("View Cars");
         viewcar_button.setBounds(300, 420, 450, 90);
         viewcar_button.setBackground(Color.CYAN);
         viewcar_button.setFont(new Font("Aerial", Font.BOLD, 25));
         viewcar_button.addActionListener(new Handler());
 
-        deletecar_button = new JButton("Manage Bookings");
+        deletecar_button = new JButton("Delete Cars");
         deletecar_button.setBounds(300, 565, 450, 90);
         deletecar_button.setBackground(Color.CYAN);
         deletecar_button.setFont(new Font("Aerial", Font.BOLD, 25));
@@ -73,16 +73,18 @@ public class Admin_Manage_Car_Board {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == addcar_button){
-
+                frame.dispose();
+                Admin_Add_Car_GUI admin_add_car_gui = new Admin_Add_Car_GUI();
             }
             if(e.getSource() == updatecar_button){
 
             }
             if (e.getSource() == viewcar_button) {
-
+                Admin_View_Car_GUI admin_view_car_gui = new Admin_View_Car_GUI();
             }
             if(e.getSource() == deletecar_button){
-
+                frame.dispose();
+                Admin_Delete_Car_GUI admin_delete_car_gui = new Admin_Delete_Car_GUI();
             }
             if(e.getSource() == back_button){
                 frame.dispose();
