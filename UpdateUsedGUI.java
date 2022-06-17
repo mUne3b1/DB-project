@@ -55,7 +55,19 @@ public class UpdateUsedGUI {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-        }
-    }
-}
+                if (e.getSource() == update_price) {
+                    frame.dispose();
+                    UpdateUsedPriceGUI carprice = new UpdateUsedPriceGUI();
+                }
+                if (e.getSource() == update_price) {
+                    frame.dispose();
+                    UpdateUsedQuantityGUI g = new UpdateUsedQuantityGUI();
+                }
+                if(e.getSource() == back_button){
+                    frame.dispose();
+                    Main_DashBoard main_dashBoard = new Main_DashBoard();
+                }
+            }
+        }}
+
 
