@@ -59,7 +59,7 @@ public class updateCarsGUI {
                 frame.dispose();
                 AddNewCarPriecGUI carprice = new AddNewCarPriecGUI();
             }
-            if (e.getSource() == update_price) {
+            if (e.getSource() == update_quantity) {
                 frame.dispose();
                 CarAddNewQuantityGUI g = new CarAddNewQuantityGUI();
             }

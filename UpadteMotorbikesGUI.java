@@ -61,7 +61,7 @@ public class UpadteMotorbikesGUI {
                 frame.dispose();
                 BikeAddNewPriceGUI carprice = new BikeAddNewPriceGUI();
             }
-            if (e.getSource() == update_price) {
+            if (e.getSource() == update_quantity) {
                 frame.dispose();
                 AddBikeQuantityGUI g = new AddBikeQuantityGUI();
             }
