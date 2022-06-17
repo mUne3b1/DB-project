@@ -65,12 +65,14 @@ public class Main_DashBoard {
             }
             if(e.getSource() == user_button){
                 frame.dispose();
-                User_Board user_board = new User_Board();
+                //User_Board user_board = new User_Board();
             }
             if(e.getSource() == admin_button){
                 System.out.println("Done");
                 frame.dispose();
                 Admin_Login admin_login = new Admin_Login();
+
+
             }
         }
     }
