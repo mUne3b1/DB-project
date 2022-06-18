@@ -16,7 +16,7 @@ public class UpadteMotorbikesGUI {
     public UpadteMotorbikesGUI() {
         frame = new JFrame("Vehicle Showroom Management System");
         panel = new JPanel(null);
-        main_label = new JLabel("Update Bik details");
+        main_label = new JLabel("Update Bike details");
         main_label.setFont(new Font("Serif", Font.BOLD, 45));
         main_label.setForeground(Color.CYAN);
         main_label.setBounds(350, 30, 700, 100);
@@ -67,7 +67,7 @@ public class UpadteMotorbikesGUI {
             }
             if (e.getSource() == back_button) {
                 frame.dispose();
-                Main_DashBoard main_dashBoard = new Main_DashBoard();
+                Admin_Manage_Bike_Board manage_bike_board = new Admin_Manage_Bike_Board();
             }
         }
     }}
