@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Admin_Delete_Bike_GUI {
+public class Admin_Delete_Customer_GUI {
     private JFrame frame;
     private JPanel panel;
 
@@ -15,11 +15,11 @@ public class Admin_Delete_Bike_GUI {
     private JButton delete_button;
     private JButton back_button;
 
-    public Admin_Delete_Bike_GUI(){
+    public Admin_Delete_Customer_GUI(){
         frame = new JFrame("Vehicle Showroom Management System");
         panel = new JPanel(null);
 
-        main_label = new JLabel("Delete Bikes");
+        main_label = new JLabel("Delete Customers");
         main_label.setFont(new Font("Serif", Font.BOLD, 35));
         main_label.setForeground(Color.CYAN);
         main_label.setBounds(430, 20, 700, 100);
@@ -33,7 +33,7 @@ public class Admin_Delete_Bike_GUI {
         delete_field = new JTextField();
         delete_field.setBounds(700, 628, 100, 30);
 
-        delete_label = new JLabel("Enter Serial number of bike you want to delete: ");
+        delete_label = new JLabel("Enter Serial number of customer you want to delete: ");
         delete_label.setFont(new Font("", Font.BOLD, 25));
         delete_label.setForeground(Color.CYAN);
         delete_label.setBounds(130, 590, 700, 100);
