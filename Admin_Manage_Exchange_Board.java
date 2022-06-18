@@ -19,29 +19,29 @@ public class Admin_Manage_Exchange_Board {
         main_label = new JLabel("Manage Exchange Vehicles");
         main_label.setFont(new Font("Serif", Font.BOLD, 35));
         main_label.setForeground(Color.CYAN);
-        main_label.setBounds(430, 30, 700, 100);
+        main_label.setBounds(320, 30, 700, 100);
 
 
         addcar_button = new JButton("Add cars");
-        addcar_button.setBounds(300, 130, 450, 90);
+        addcar_button.setBounds(300, 190, 450, 90);
         addcar_button.setBackground(Color.CYAN);
         addcar_button.setFont(new Font("Aerial", Font.BOLD, 25));
         addcar_button.addActionListener(new Admin_Manage_Exchange_Board.Handler());
 
         viewcar_button = new JButton("View Cars");
-        viewcar_button.setBounds(300, 420, 450, 90);
+        viewcar_button.setBounds(300, 480, 450, 90);
         viewcar_button.setBackground(Color.CYAN);
         viewcar_button.setFont(new Font("Aerial", Font.BOLD, 25));
         viewcar_button.addActionListener(new Admin_Manage_Exchange_Board.Handler());
 
         deletecar_button = new JButton("Delete cars");
-        deletecar_button.setBounds(300, 270, 450, 90);
+        deletecar_button.setBounds(300, 330, 450, 90);
         deletecar_button.setBackground(Color.CYAN);
         deletecar_button.setFont(new Font("Aerial", Font.BOLD, 25));
         deletecar_button.addActionListener(new Admin_Manage_Exchange_Board.Handler());
 
         back_button = new JButton("Back");
-        back_button.setBounds(435, 690, 180, 60);
+        back_button.setBounds(435, 640, 180, 60);
         back_button.setBackground(Color.CYAN);
         back_button.setFont(new Font("Aerial", Font.BOLD, 20));
         back_button.addActionListener(new Admin_Manage_Exchange_Board.Handler());
@@ -65,19 +65,15 @@ public class Admin_Manage_Exchange_Board {
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == addcar_button){
                 frame.dispose();
-                Admin_Add_Car_GUI admin_add_car_gui = new Admin_Add_Car_GUI();
-            }
-            if(e.getSource() == updatecar_button){
-                frame.dispose();
-                updateCarsGUI updateCarsGUI = new updateCarsGUI();
+                Admin_Add_Exchange_Vehicle n = new Admin_Add_Exchange_Vehicle();
             }
             if (e.getSource() == viewcar_button) {
                 frame.dispose();
-                Admin_View_Car_GUI admin_view_car_gui = new Admin_View_Car_GUI();
+                Admin_View_Exchange_Car admin_view_exchange_car = new Admin_View_Exchange_Car();
             }
             if(e.getSource() == deletecar_button){
                 frame.dispose();
-                Admin_Delete_Car_GUI admin_delete_car_gui = new Admin_Delete_Car_GUI();
+                Admin_Delete_Exchange_Vehicle admin_delete_exchange_vehicle = new Admin_Delete_Exchange_Vehicle();
             }
             if(e.getSource() == back_button){
                 frame.dispose();
@@ -86,4 +82,4 @@ public class Admin_Manage_Exchange_Board {
         }
     }
 }
-}
+
