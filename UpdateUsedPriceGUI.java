@@ -18,7 +18,7 @@ public class UpdateUsedPriceGUI {
         main_label = new JLabel("Update Used Vehicle price");
         main_label.setFont(new Font("Serif", Font.BOLD, 45));
         main_label.setForeground(Color.CYAN);
-        main_label.setBounds(350, 30, 700, 100);
+        main_label.setBounds(290, 30, 700, 100);
 
 
         update_price = new JTextField();
