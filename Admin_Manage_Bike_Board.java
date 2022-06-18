@@ -78,7 +78,7 @@ public class Admin_Manage_Bike_Board {
             }
             if(e.getSource() == updatebike_button){
                 frame.dispose();
-                UpadteMotorbikesGUI upadteMotorbikesGUI = new UpadteMotorbikesGUI();
+                Admin_Update_Bike_GUI admin_update_bike_gui = new Admin_Update_Bike_GUI();
             }
             if (e.getSource() == viewbike_button) {
                 frame.dispose();

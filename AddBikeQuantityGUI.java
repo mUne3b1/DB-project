@@ -61,7 +61,7 @@ public class AddBikeQuantityGUI {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == back_button) {
                 frame.dispose();
-                UpadteMotorbikesGUI um = new UpadteMotorbikesGUI();
+                Admin_Update_Bike_GUI um = new Admin_Update_Bike_GUI();
             }
 
         }}}

@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Admin_View_Customer_GUI {
+public class Admin_View_Bookings_GUI {
     private JFrame frame;
     private JPanel panel;
 
@@ -12,11 +12,11 @@ public class Admin_View_Customer_GUI {
 
     private JButton back_button;
 
-    public Admin_View_Customer_GUI(){
+    public Admin_View_Bookings_GUI() {
         frame = new JFrame("Vehicle Showroom Management System");
         panel = new JPanel(null);
 
-        main_label = new JLabel("View Customers");
+        main_label = new JLabel("View Bookings");
         main_label.setFont(new Font("Serif", Font.BOLD, 35));
         main_label.setForeground(Color.CYAN);
         main_label.setBounds(430, 20, 700, 100);
@@ -52,7 +52,7 @@ public class Admin_View_Customer_GUI {
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == back_button){
                 frame.dispose();
-                Admin_Manage_Customer_Board admin_manage_customer_board = new Admin_Manage_Customer_Board();
+                Admin_Manage_Booking_GUI admin_manage_booking_gui = new Admin_Manage_Booking_GUI();
             }
         }
     }

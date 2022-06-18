@@ -61,7 +61,7 @@ public class AddNewCarPriecGUI {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == back_button) {
                 frame.dispose();
-                updateCarsGUI up = new updateCarsGUI();
+                Admin_Update_Car_GUI up = new Admin_Update_Car_GUI();
             }
 
         }}}

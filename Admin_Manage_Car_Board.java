@@ -12,6 +12,7 @@ public class Admin_Manage_Car_Board {
     private JButton viewcar_button;
     private JButton deletecar_button;
     private JButton back_button;
+
     public Admin_Manage_Car_Board(){
         frame = new JFrame("Vehicle Showroom Management System");
         panel = new JPanel(null);
@@ -76,7 +77,7 @@ public class Admin_Manage_Car_Board {
             }
             if(e.getSource() == updatecar_button){
                 frame.dispose();
-                updateCarsGUI updateCarsGUI = new updateCarsGUI();
+                Admin_Update_Car_GUI admin_update_car_gui = new Admin_Update_Car_GUI();
             }
             if (e.getSource() == viewcar_button) {
                 frame.dispose();

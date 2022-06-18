@@ -36,7 +36,7 @@ public class Admin_Delete_Customer_GUI {
         delete_label = new JLabel("Enter Serial number of customer you want to delete: ");
         delete_label.setFont(new Font("", Font.BOLD, 25));
         delete_label.setForeground(Color.CYAN);
-        delete_label.setBounds(130, 590, 700, 100);
+        delete_label.setBounds(100, 590, 700, 100);
 
         back_button = new JButton("Back");
         back_button.setBounds(290, 685, 180, 60);
@@ -70,7 +70,7 @@ public class Admin_Delete_Customer_GUI {
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == back_button){
                 frame.dispose();
-                Admin_Manage_Bike_Board admin_manage_bike_board = new Admin_Manage_Bike_Board();
+                Admin_Manage_Customer_Board admin_manage_customer_board = new Admin_Manage_Customer_Board();
             }
             if(e.getSource() == delete_button){
                 frame.dispose();

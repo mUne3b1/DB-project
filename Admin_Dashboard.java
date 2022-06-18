@@ -77,13 +77,15 @@ public class Admin_Dashboard {
             }
             if(e.getSource() == customer_button){
                 frame.dispose();
-                Admin_View_Customer_GUI admin_view_customer_gui = new Admin_View_Customer_GUI();
+                Admin_Manage_Customer_Board admin_manage_customer_board = new Admin_Manage_Customer_Board();
             }
             if (e.getSource() == sales_button) {
-
+                frame.dispose();
+                Admin_View_Sales_Report admin_view_sales_report = new Admin_View_Sales_Report();
             }
             if(e.getSource() == bookings_button){
-
+                frame.dispose();
+                Admin_Manage_Booking_GUI admin_manage_booking_gui = new Admin_Manage_Booking_GUI();
             }
             if(e.getSource() == logout_button){
                 JOptionPane.showMessageDialog(null, "You are signed out successfully!!!");

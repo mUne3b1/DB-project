@@ -10,7 +10,7 @@ Get_Started get_started = new Get_Started();
 //        Sign_In_GUI sign_in_gui = new Sign_In_GUI();
 
 //        Admin_Login admin_login = new Admin_Login();
-   Admin_Dashboard admin_dashboard = new Admin_Dashboard();
+//   Admin_Dashboard admin_dashboard = new Admin_Dashboard();
 //        Admin_Manage_Car_Board admin_manage_car_board = new Admin_Manage_Car_Board();
 //        Admin_Add_Car_GUI admin_add_car_gui = new Admin_Add_Car_GUI();
 
