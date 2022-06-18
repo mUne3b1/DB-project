@@ -65,7 +65,7 @@ public class UpdateUsedGUI {
                 }
                 if(e.getSource() == back_button){
                     frame.dispose();
-                    //Main_DashBoard main_dashBoard = new Main_DashBoard();
+                    Admin_Manage_Used_Vehicle_Board admin_manage_used_vehicle_board = new Admin_Manage_Used_Vehicle_Board();
                 }
             }
         }}

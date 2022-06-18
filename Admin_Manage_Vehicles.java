@@ -72,7 +72,7 @@ public class Admin_Manage_Vehicles {
                 Admin_Manage_Bike_Board admin_manage_bike_board = new Admin_Manage_Bike_Board();
             }
             if(e.getSource() == manage_used_vehicles){
-
+                Admin_Manage_Used_Vehicle_Board admin_manage_used_vehicle_board = new Admin_Manage_Used_Vehicle_Board();
             }
             if(e.getSource() == back_button){
                 frame.dispose();

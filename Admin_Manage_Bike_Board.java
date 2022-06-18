@@ -74,7 +74,7 @@ public class Admin_Manage_Bike_Board {
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == addbike_button){
                 frame.dispose();
-                Admin_Add_Bike_GUI admin_add_bike = new Admin_Add_Bike_GUI();
+                Admin_Add_Bike_GUI admin_add_bike_gui = new Admin_Add_Bike_GUI();
             }
             if(e.getSource() == updatebike_button){
                 frame.dispose();
@@ -82,11 +82,11 @@ public class Admin_Manage_Bike_Board {
             }
             if (e.getSource() == viewbike_button) {
                 frame.dispose();
-                Admin_View_Bikes_GUI  admin_view_bikes_gui = new Admin_View_Bikes_GUI();
+                Admin_View_Bike_GUI admin_view_bike_gui = new Admin_View_Bike_GUI();
             }
             if(e.getSource() == deletebike_button){
                 frame.dispose();
-                Admin_Delete_Bike_GUI admin_delete_bike_gui  = new Admin_Delete_Bike_GUI();
+                Admin_Delete_Bike_GUI admin_delete_bike_gui = new Admin_Delete_Bike_GUI();
             }
             if(e.getSource() == back_button){
                 frame.dispose();

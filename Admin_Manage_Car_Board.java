@@ -3,7 +3,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 public class Admin_Manage_Car_Board {
     private JFrame frame;
     private JPanel panel;
@@ -13,7 +12,6 @@ public class Admin_Manage_Car_Board {
     private JButton viewcar_button;
     private JButton deletecar_button;
     private JButton back_button;
-
     public Admin_Manage_Car_Board(){
         frame = new JFrame("Vehicle Showroom Management System");
         panel = new JPanel(null);
@@ -95,4 +93,3 @@ public class Admin_Manage_Car_Board {
         }
     }
 }
-

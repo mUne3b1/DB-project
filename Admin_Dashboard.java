@@ -76,7 +76,8 @@ public class Admin_Dashboard {
                 Admin_Manage_Vehicles admin_manage_vehicles = new Admin_Manage_Vehicles();
             }
             if(e.getSource() == customer_button){
-
+                frame.dispose();
+                Admin_View_Customer_GUI admin_view_customer_gui = new Admin_View_Customer_GUI();
             }
             if (e.getSource() == sales_button) {
 

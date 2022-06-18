@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Admin_Delete_Bike_GUI {
+public class Admin_Delete_Used_Car_GUI {
     private JFrame frame;
     private JPanel panel;
 
@@ -15,14 +15,14 @@ public class Admin_Delete_Bike_GUI {
     private JButton delete_button;
     private JButton back_button;
 
-    public Admin_Delete_Bike_GUI(){
+    public Admin_Delete_Used_Car_GUI(){
         frame = new JFrame("Vehicle Showroom Management System");
         panel = new JPanel(null);
 
-        main_label = new JLabel("Delete Bikes");
+        main_label = new JLabel("Delete Used Cars");
         main_label.setFont(new Font("Serif", Font.BOLD, 35));
         main_label.setForeground(Color.CYAN);
-        main_label.setBounds(430, 20, 700, 100);
+        main_label.setBounds(400, 20, 700, 100);
 
         info_area = new TextArea();
         info_area.setBounds(0, 120, 1000, 470);
@@ -70,7 +70,7 @@ public class Admin_Delete_Bike_GUI {
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == back_button){
                 frame.dispose();
-                Admin_Manage_Bike_Board admin_manage_bike_board = new Admin_Manage_Bike_Board();
+                Admin_Manage_Used_Vehicle_Board admin_manage_used_board = new Admin_Manage_Used_Vehicle_Board();
             }
         }
     }
