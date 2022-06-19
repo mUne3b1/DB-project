@@ -15,10 +15,10 @@ public class Admin_View_Exchange_Car {
         frame = new JFrame("Vehicle Showroom Management System");
         panel = new JPanel(null);
 
-        main_label = new JLabel("View Cars");
+        main_label = new JLabel("View Exchange Cars");
         main_label.setFont(new Font("Serif", Font.BOLD, 35));
         main_label.setForeground(Color.CYAN);
-        main_label.setBounds(430, 20, 700, 100);
+        main_label.setBounds(400, 20, 700, 100);
 
         info_area = new TextArea();
         info_area.setBounds(0, 120, 1000, 550);

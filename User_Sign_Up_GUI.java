@@ -1,8 +1,9 @@
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
+import java.util.Random;
 
 public class User_Sign_Up_GUI {
     private JFrame frame;
@@ -18,6 +19,8 @@ public class User_Sign_Up_GUI {
     private JButton signup_button;
     private JButton clear_button;
 
+    private Random random;
+
     public User_Sign_Up_GUI() {
         frame = new JFrame("Vehicle Management System");
         panel = new JPanel(null);
@@ -25,7 +28,7 @@ public class User_Sign_Up_GUI {
         main_label = new JLabel("Sign UP");
         main_label.setFont(new Font("Serif", Font.BOLD, 50));
         main_label.setForeground(Color.CYAN);
-        main_label.setBounds(400, 60, 700, 100);
+        main_label.setBounds(410, 60, 700, 100);
 
         email_field = new JTextField();
         email_field.setBounds(400, 210, 450, 40);
@@ -54,13 +57,13 @@ public class User_Sign_Up_GUI {
 
 
         back_button = new JButton("Back");
-        back_button.setBounds(410, 600, 180, 60);
+        back_button.setBounds(110, 600, 180, 60);
         back_button.setBackground(Color.CYAN);
         back_button.setFont(new Font("Aerial", Font.BOLD, 20));
         back_button.addActionListener(new Handler());
 
         signup_button = new JButton("Sign Up");
-        signup_button.setBounds(110, 600, 180, 60);
+        signup_button.setBounds(410, 600, 180, 60);
         signup_button.setBackground(Color.CYAN);
         signup_button.setFont(new Font("Aerial", Font.BOLD, 20));
         signup_button.addActionListener(new Handler());
@@ -92,14 +95,40 @@ public class User_Sign_Up_GUI {
         frame.setResizable(false);
     }
     class Handler implements ActionListener{
+        private int id;
+        private ResultSet result;
+        public PreparedStatement st;
 
         @Override
         public void actionPerformed(ActionEvent e) {
+
+            random = new Random();
+            id = random.nextInt(10000)+1;
+            String password = password_field.getText();
+            String email = email_field.getText();
+            String name = name_field.getText();
+
             if(e.getSource() == back_button){
                 frame.dispose();
                 User_Board user_board = new User_Board();
             }
             if(e.getSource() == signup_button){
+                String query = "insert into Muneeb.customer(password, user_id, user_mail, name) values(?, ?, ?, ?)";
+                try {
+                    Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","Muneeb","you");
+                    PreparedStatement pst = con.prepareStatement(query);
+                    pst.setString(1, password_field.getText());
+                    pst.setInt(2, id);
+                    pst.setString(3, email_field.getText());
+                    pst.setString(4, name_field.getText());
+                    pst.executeUpdate();
+
+                    System.out.println("Inserted");
+                    con.close();
+
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
 
             }
             if(e.getSource() == clear_button){

@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
 
 public class Admin_Login {
     JFrame frame;
@@ -63,8 +64,34 @@ public class Admin_Login {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == login_button){
-                frame.dispose();
-                Admin_Dashboard admin_dashboard = new Admin_Dashboard();
+                boolean chk = true;
+                try{
+                    Integer.parseInt(passcode_field.getText());
+                    try {
+                        Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","Muneeb","you");
+                        Statement st = con.createStatement();
+                        ResultSet result = st.executeQuery("select * from Admin");
+                        while(result.next()){
+                            if(result.getInt(2) == Integer.parseInt(passcode_field.getText())){
+                                JOptionPane.showMessageDialog(null, "You are Logged In successfully!!!");
+                                frame.dispose();
+                                chk = false;
+                                Admin_Dashboard admin_dashboard = new Admin_Dashboard();
+                            }
+                        }
+                    } catch (SQLException ex) {
+                        System.out.println(e.toString());
+                    }
+                    if(chk){
+                        JOptionPane.showMessageDialog(null, "Invalid Credentials!!!");
+                        frame.dispose();
+                        Main_DashBoard main_dashBoard = new Main_DashBoard();
+                    }
+
+                }catch (Exception z){
+                    JOptionPane.showMessageDialog(null, "Enter valid Integer!!!");
+                    passcode_field.setText("");
+                }
             }
             if(e.getSource() == back_button){
                 frame.dispose();
