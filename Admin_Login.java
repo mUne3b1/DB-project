@@ -79,6 +79,7 @@ public class Admin_Login {
                                 Admin_Dashboard admin_dashboard = new Admin_Dashboard();
                             }
                         }
+                        con.close();
                     } catch (SQLException ex) {
                         System.out.println(e.toString());
                     }

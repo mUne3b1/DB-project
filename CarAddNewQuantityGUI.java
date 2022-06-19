@@ -2,6 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 
 public class CarAddNewQuantityGUI {
     private  JFrame frame;
@@ -11,7 +15,7 @@ public class CarAddNewQuantityGUI {
     private JButton  update_button;
     private JLabel update_price_label;
 
-    private JTextField update_price;
+    private JTextField update_quantity;
     public CarAddNewQuantityGUI() {
         frame = new JFrame("Update car  quantity");
         panel = new JPanel(null);
@@ -21,8 +25,8 @@ public class CarAddNewQuantityGUI {
         main_label.setBounds(350, 30, 700, 100);
 
 
-        update_price = new JTextField();
-        update_price.setBounds(310, 250, 450, 40);
+        update_quantity = new JTextField();
+        update_quantity.setBounds(310, 250, 450, 40);
 
         update_price_label = new JLabel("Add new quantity:");
         update_price_label.setFont(new Font("Aerial", Font.BOLD, 30));
@@ -43,7 +47,7 @@ public class CarAddNewQuantityGUI {
 
         panel.setBackground(new Color(21, 40, 51));
         panel.add(main_label);
-        panel.add(update_price);
+        panel.add(update_quantity);
         panel.add(update_price_label);
         panel.add(update_button);
         panel.add(back_button);
@@ -59,9 +63,43 @@ public class CarAddNewQuantityGUI {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+
+            if(e.getSource() == update_button){
+
+                try {
+                    int temp = Integer.parseInt(update_quantity.getText());
+
+                    if (update_quantity.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Fields should not be empty!!!");
+                        update_quantity.setText("");
+                    } else {
+                        try {
+                            Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "Muneeb", "you");
+                            Statement st = con.createStatement();
+
+                            String query = "update cars set car_quantity = ? where car_id = ?";
+                            PreparedStatement pst = con.prepareStatement(query);
+                            pst.setInt(1, Integer.parseInt(update_quantity.getText()));
+                            pst.setString(2, String.valueOf(Admin_Update_Select_Car_Gui.car_id));
+                            pst.executeUpdate();
+
+                            JOptionPane.showMessageDialog(null, "Quantity updated!!!");
+                            frame.dispose();
+                            Admin_Manage_Car_Board admin_manage_car_board = new Admin_Manage_Car_Board();
+                        } catch (Exception ex) {
+                            System.out.println(ex.toString());
+                        }
+                    }
+                }
+                catch (Exception v){
+                    System.out.println("Enter valid Integer!!!");
+                }
+
+            }
             if (e.getSource() == back_button) {
                 frame.dispose();
                 Admin_Update_Car_GUI up = new Admin_Update_Car_GUI();
             }
-
-        }}}
+        }
+    }
+}

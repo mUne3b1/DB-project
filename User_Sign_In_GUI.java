@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
 
 public class User_Sign_In_GUI {
     private JFrame frame;
@@ -88,7 +89,35 @@ public class User_Sign_In_GUI {
                 User_Board user_board = new User_Board();
             }
             if(e.getSource() == signin_button){
+                boolean chk = true;
+                if(email_field.getText().isEmpty() || password_field.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Fields should not be empty!!!");
+                }
+                else{
+                    try {
+                        Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","Muneeb","you");
+                        Statement st = con.createStatement();
+                        ResultSet result = st.executeQuery("select * from customer");
+                        while(result.next()) {
+                            if (email_field.getText().equals(result.getString(3)) &&
+                                    password_field.getText().equals(result.getString(1))) {
+                                JOptionPane.showMessageDialog(null, "You are Logged In successfully!!!");
+                                con.close();
+//                                frame.dispose();
+                                chk = false;
+                            }
+                        }
+                    } catch (SQLException ex) {
+                        System.out.println(e.toString());
+                    }
+                    if(chk){
+                        JOptionPane.showMessageDialog(null, "Invalid Credentials!!!");
+                        password_field.setText("");
+                        email_field.setText("");
+//                        frame.dispose();
 
+                    }
+                }
             }
             if(e.getSource() == clear_button){
                 email_field.setText("");

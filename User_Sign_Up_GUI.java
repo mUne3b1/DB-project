@@ -112,22 +112,44 @@ public class User_Sign_Up_GUI {
                 frame.dispose();
                 User_Board user_board = new User_Board();
             }
+
             if(e.getSource() == signup_button){
-                String query = "insert into Muneeb.customer(password, user_id, user_mail, name) values(?, ?, ?, ?)";
-                try {
-                    Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","Muneeb","you");
-                    PreparedStatement pst = con.prepareStatement(query);
-                    pst.setString(1, password_field.getText());
-                    pst.setInt(2, id);
-                    pst.setString(3, email_field.getText());
-                    pst.setString(4, name_field.getText());
-                    pst.executeUpdate();
+                boolean chk = true;
+                if(name_field.getText().isEmpty() || email_field.getText().isEmpty() || password_field.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Fields should not be empty!!!");
+                }
+                else{
+                    try {
+                        Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","Muneeb","you");
 
-                    System.out.println("Inserted");
-                    con.close();
-
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
+//                        Check for already signed up users
+                        Statement st = con.createStatement();
+                        ResultSet result = st.executeQuery("select * from customer");
+                        while(result.next()){
+                            if (email_field.getText().equals(result.getString(3))) {
+                                JOptionPane.showMessageDialog(null, "User already exists!!!");
+                                frame.dispose();
+                                User_Board user_board = new User_Board();
+                                chk = false;
+                            }
+                        }
+                        if(chk){
+                            String query = "insert into customer(password, user_id, user_mail, name) values(?, ?, ?, ?)";
+                            PreparedStatement pst = con.prepareStatement(query);
+                            pst.setString(1, password_field.getText());
+                            pst.setInt(2, id);
+                            pst.setString(3, email_field.getText());
+                            pst.setString(4, name_field.getText());
+                            pst.executeUpdate();
+                            JOptionPane.showMessageDialog(null, "Sign up Successful!!!");
+                            con.close();
+                            frame.dispose();
+                            User_Board user_board = new User_Board();
+                        }
+                        con.close();
+                    } catch (SQLException ex) {
+                        System.out.println(e.toString());
+                    }
                 }
 
             }

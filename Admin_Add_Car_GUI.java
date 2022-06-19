@@ -2,6 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.sql.*;
+import java.util.Random;
 
 public class Admin_Add_Car_GUI {
     private JFrame frame;
@@ -22,7 +26,9 @@ public class Admin_Add_Car_GUI {
     private JTextField car_engine_field;
     private JTextField car_quantity_field;
 
-
+    private JComboBox manufacturer_combo;
+    private String combo_default = "man1";
+    private int man_id = 0;
 
     private JButton add_button;
     private JButton clear_button;
@@ -85,7 +91,16 @@ public class Admin_Add_Car_GUI {
         car_quantity_field.setBounds(400, 490, 350, 40);
 
 
+        String[] manu = {"man1", "man2", "man3", "man4"};
+        manufacturer_combo = new JComboBox<>(manu);
+        manufacturer_combo.setBounds(800, 494, 120, 35);
+        manufacturer_combo.addItemListener(e -> {
+            if(e.getStateChange()==ItemEvent.SELECTED){
+                combo_default = (String)e.getItem();
 
+
+            }
+        });
 
         back_button = new JButton("Back");
         back_button.setBounds(100, 630, 180, 60);
@@ -119,6 +134,7 @@ public class Admin_Add_Car_GUI {
         panel.add(car_price_label);
         panel.add(car_quantity_field);
         panel.add(car_quantity_label);
+        panel.add(manufacturer_combo);
 
         panel.add(back_button);
         panel.add(clear_button);
@@ -132,11 +148,85 @@ public class Admin_Add_Car_GUI {
         frame.setResizable(false);
     }
     class Handler implements ActionListener{
+        private int id;
+        private Random random;
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            boolean chk = true;
+
+            String model = car_model_field.getText();
+            int mileage = Integer.parseInt(car_mileage_field.getText());
+            int price = Integer.parseInt(car_price_field.getText());
+            String engine = car_engine_field.getText();
+            int quantity = Integer.parseInt(car_quantity_field.getText());
+
+            random = new Random();
+            id = random.nextInt(10000)+1;
+
             if(e.getSource() == add_button){
 
+                try{
+                    Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","Muneeb","you");
+                    Statement st = con.createStatement();
+                    ResultSet result = st.executeQuery("select * from manufacturer");
+                    while(result.next() && !combo_default.equals(result.getString(2))){
+                    }
+                    man_id = Integer.parseInt(result.getString(1));
+
+                    con.close();
+                }catch (Exception ex){
+                    System.out.println(ex.toString());
+                }
+
+                if(car_model_field.getText().isEmpty() || car_mileage_field.getText().isEmpty() || car_price_field.getText().isEmpty() ||
+                car_company_field.getText().isEmpty() || car_engine_field.getText().isEmpty() || car_quantity_field.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Fields should not be empty!!!");
+                }
+                else{
+                    int ad_id = 12;
+
+                    try {
+                        Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","Muneeb","you");
+
+//                        Check for already added car
+                        Statement st = con.createStatement();
+                        ResultSet result = st.executeQuery("select * from cars");
+                        while(result.next()){
+                            if (id == result.getInt(1)) {
+                                JOptionPane.showMessageDialog(null, "Car already exists!!!");
+                                frame.dispose();
+                                Admin_Manage_Car_Board admin_manage_car_board = new Admin_Manage_Car_Board();
+                                chk = false;
+                            }
+                        }
+//                        ResultSet result2 = st.executeQuery("select * from manufacturer");
+//                        while(result2.next()){
+//                            man_id = result.getInt(1);
+//                        }
+                        if(chk){
+                            String query = "insert into cars(car_id, car_model, car_mileage, car_engine, car_price, car_quantity, manufacturer_manufacturer_id, admin_admin_id) values(?, ?, ?, ?, ?, ?, ?, ?)";
+                            PreparedStatement pst = con.prepareStatement(query);
+                            pst.setInt(1, id);
+                            pst.setString(2, model);
+                            pst.setInt(3, mileage);
+                            pst.setString(4, engine);
+                            pst.setInt(5, price);
+                            pst.setInt(6, quantity);
+                            pst.setInt(7, man_id);
+                            pst.setInt(8, ad_id);
+                            pst.executeUpdate();
+                            JOptionPane.showMessageDialog(null, "Car added successful!!!");
+                            con.close();
+                            frame.dispose();
+                            Admin_Manage_Car_Board admin_manage_car_board = new Admin_Manage_Car_Board();
+                        }
+
+
+                    } catch (Exception ex) {
+                        System.out.println(ex.toString());
+                    }
+                }
             }
             if(e.getSource() == clear_button){
                 car_model_field.setText("");

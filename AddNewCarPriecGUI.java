@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
 
 public class AddNewCarPriecGUI {
     private JFrame frame;
@@ -59,9 +60,45 @@ public class AddNewCarPriecGUI {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+
+            if(e.getSource() == update_button){
+
+                try{
+                    int temp = Integer.parseInt(update_price.getText());
+
+                    if(update_price.getText().isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Fields should not be empty!!!");
+                        update_price.setText("");
+                    }
+                    else{
+                        try {
+                            Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","Muneeb","you");
+                            Statement st = con.createStatement();
+
+                            String query = "update cars set car_price = ? where car_id = ?";
+                            PreparedStatement pst = con.prepareStatement(query);
+                            pst.setInt(1, Integer.parseInt(update_price.getText()));
+                            pst.setString(2, String.valueOf(Admin_Update_Select_Car_Gui.car_id));
+                            pst.executeUpdate();
+
+                            JOptionPane.showMessageDialog(null, "Price updated!!!");
+                            frame.dispose();
+                            Admin_Manage_Car_Board admin_manage_car_board = new Admin_Manage_Car_Board();
+                        } catch (Exception ex) {
+                            System.out.println(ex.toString());
+                        }
+                    }
+                }
+                catch (Exception v){
+                    System.out.println("Enter valid Integer!!!");
+                }
+
+            }
             if (e.getSource() == back_button) {
                 frame.dispose();
                 Admin_Update_Car_GUI up = new Admin_Update_Car_GUI();
             }
 
-        }}}
+        }
+    }
+}
