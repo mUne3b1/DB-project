@@ -23,7 +23,7 @@ public class User_Sign_In_GUI {
         main_label = new JLabel("Sign In");
         main_label.setFont(new Font("Serif", Font.BOLD, 50));
         main_label.setForeground(Color.CYAN);
-        main_label.setBounds(400, 60, 700, 100);
+        main_label.setBounds(410, 60, 700, 100);
 
         email_field = new JTextField();
         email_field.setBounds(400, 250, 450, 40);
@@ -44,13 +44,13 @@ public class User_Sign_In_GUI {
 
 
         back_button = new JButton("Back");
-        back_button.setBounds(410, 600, 180, 60);
+        back_button.setBounds(110, 600, 180, 60);
         back_button.setBackground(Color.CYAN);
         back_button.setFont(new Font("Aerial", Font.BOLD, 20));
         back_button.addActionListener(new Handler());
 
         signin_button = new JButton("Sign In");
-        signin_button.setBounds(110, 600, 180, 60);
+        signin_button.setBounds(410, 600, 180, 60);
         signin_button.setBackground(Color.CYAN);
         signin_button.setFont(new Font("Aerial", Font.BOLD, 20));
         signin_button.addActionListener(new Handler());
