@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
+import java.util.Random;
 
 public class Admin_Add_Bike_GUI {
     private JFrame frame;
@@ -18,7 +20,7 @@ public class Admin_Add_Bike_GUI {
     private JTextField bike_model_field;
     private JTextField bike_mileage_field;
     private JTextField bike_price_field;
-    private JTextField bike_company_field;
+    private JTextField bike_weight_field;
     private JTextField bike_engine_field;
     private JTextField bike_quantity_field;
 
@@ -27,6 +29,8 @@ public class Admin_Add_Bike_GUI {
     private JButton add_button;
     private JButton clear_button;
     private JButton back_button;
+    private String combo_default = "man1";
+    private int man_id = 0;
     public Admin_Add_Bike_GUI(){
         frame = new JFrame("Vehicle Showroom Management System");
         panel = new JPanel(null);
@@ -48,8 +52,8 @@ public class Admin_Add_Bike_GUI {
         bike_company_label.setForeground(Color.CYAN);
         bike_company_label.setBounds(230, 180, 700, 100);
 
-        bike_company_field = new JTextField();
-        bike_company_field.setBounds(400, 210, 350, 40);
+        bike_weight_field = new JTextField();
+        bike_weight_field.setBounds(400, 210, 350, 40);
 
         bike_mileage_label = new JLabel("Mileage:");
         bike_mileage_label.setFont(new Font("", Font.BOLD, 25));
@@ -108,7 +112,7 @@ public class Admin_Add_Bike_GUI {
 
         panel.add(bike_model_label);
         panel.add(bike_model_field);
-        panel.add(bike_company_field);
+        panel.add(bike_weight_field);
         panel.add(bike_company_label);
         panel.add(bike_mileage_field);
         panel.add(bike_mileage_label);
@@ -131,15 +135,82 @@ public class Admin_Add_Bike_GUI {
         frame.setResizable(false);
     }
     class Handler implements ActionListener {
+        private int id;
+        private Random random;
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(e.getSource() == add_button){
+            boolean chk = true;
 
+            String model =  bike_model_field  .getText();
+            int weight = Integer.parseInt(bike_weight_field.getText());
+            int mileage = Integer.parseInt(bike_mileage_field.getText());
+            String engine = bike_engine_field.getText();
+            int price = Integer.parseInt(bike_price_field.getText());
+            int quantity = Integer.parseInt(bike_quantity_field.getText());
+            random = new Random();
+            id = random.nextInt(10000)+1;
+            if(e.getSource() == add_button){
+                try{
+                    Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","Muneeb","you");
+                    Statement st = con.createStatement();
+                    ResultSet result = st.executeQuery("select * from manufacturer");
+                    while(result.next() && !combo_default.equals(result.getString(2))){
+                    }
+                    man_id = Integer.parseInt(result.getString(1));
+                    con.close();
+                }catch (Exception ex){
+                    System.out.println(ex.toString());
+                }
+                if(bike_model_field.getText().isEmpty() || bike_mileage_field.getText().isEmpty() || bike_price_field.getText().isEmpty() ||
+                        bike_weight_field.getText().isEmpty() || bike_engine_field.getText().isEmpty() || bike_quantity_field.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Fields should not be empty!!!");
+                }
+                else{
+                    int ad_id = 12;
+
+                    try {
+                        Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","Muneeb","you");
+
+//                        Check for already added car
+                        Statement st = con.createStatement();
+                        ResultSet result = st.executeQuery("select * from bike");
+                        while(result.next()){
+                            if (id == result.getInt(1)) {
+                                JOptionPane.showMessageDialog(null, "Bike already exists!!!");
+                                frame.dispose();
+                                Admin_Manage_Bike_Board admin_manage_bike_board = new Admin_Manage_Bike_Board();
+                                chk = false;
+                            }
+                        }
+                        if(chk){
+                            String query = "insert into bike(bike_id, bike_model, bike_weight, bike_mileage, bike_engine, bike_price, bike_quantity, manufacturer_manufacturer_id, admin_admin_id) values(?, ?, ?, ?, ?, ?, ?, ?)";
+                            PreparedStatement pst = con.prepareStatement(query);
+                            pst.setInt(1, id);
+                            pst.setString(2, model);
+                            pst.setInt(3, weight);
+                            pst.setInt(4, mileage);
+                            pst.setString(5, engine);
+                            pst.setInt(6, price);
+                            pst.setInt(7, quantity);
+                            pst.setInt(8, man_id);
+                            pst.setInt(9, ad_id);
+                            pst.executeUpdate();
+                            JOptionPane.showMessageDialog(null, "Bike added successful!!!");
+                            con.close();
+                            frame.dispose();
+                            Admin_Manage_Bike_Board admin_manage_bike_board = new Admin_Manage_Bike_Board();
+                        }
+
+
+                    } catch (Exception ex) {
+                        System.out.println(ex.toString());
+                    }
+                }
             }
-            if(e.getSource() == clear_button){
+                if(e.getSource() == clear_button){
                 bike_model_field.setText("");
-                bike_company_field.setText("");
+                bike_weight_field.setText("");
                 bike_engine_field.setText("");
                 bike_price_field.setText("");
                 bike_mileage_field.setText("");
@@ -150,5 +221,5 @@ public class Admin_Add_Bike_GUI {
                 Admin_Manage_Bike_Board admin_manage_car_board = new Admin_Manage_Bike_Board();
             }
         }
-    }
+                }
 }
