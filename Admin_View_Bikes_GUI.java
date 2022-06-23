@@ -2,6 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class Admin_View_Bikes_GUI {
     private JFrame frame;
@@ -44,6 +48,27 @@ public class Admin_View_Bikes_GUI {
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
+        show();
+    }
+    public void show(){
+        Update(info_area);
+    }
+
+    static void Update(TextArea info_area) {
+        try{
+            Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","Muneeb","you");
+            Statement st = con.createStatement();
+            ResultSet result = st.executeQuery("select * from bike");
+            int i = 1;
+            while(result.next()){
+                info_area.append(i +".Model: " + result.getString(2) + "  Weight: " + result.getInt(3) + "  Mileage: " + result.getInt(4)
+                        + "  Engine: " + result.getString(5) + "  Price: " + result.getInt(7) +  " Quantity:" + result.getInt(8)  + "\n");
+                i++;
+            }
+            con.close();
+        }catch (Exception ex){
+            System.out.println(ex.toString());
+        }
     }
     class Handler implements ActionListener {
 

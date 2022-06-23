@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class Admin_Delete_Exchange_Vehicle {
     private JFrame frame;
@@ -66,9 +68,58 @@ public class Admin_Delete_Exchange_Vehicle {
         frame.setResizable(false);
     }
     class Handler implements ActionListener {
-
-        @Override
         public void actionPerformed(ActionEvent e) {
+
+            ArrayList<Integer> arrayList = new ArrayList<>();
+            if(e.getSource() == delete_button){
+                int car_id = 0;
+
+                if(delete_field.getText().isEmpty()){
+                    System.out.println("Field should be empty!!!");
+                }
+                else{
+                    Connection con = null;
+                    boolean chk = true;
+                    try{
+                        int serial = Integer.parseInt(delete_field.getText());
+                        try {
+                            con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","Muneeb","you");
+                            Statement st = con.createStatement();
+                            ResultSet result = st.executeQuery("select * from used_vehicles");
+                            while(result.next()){
+                                arrayList.add(result.getInt(1));
+                            }
+                            if(serial <= arrayList.size()) {
+                                car_id = arrayList.get(serial - 1);
+                            }
+                        } catch (Exception ex) {
+                            System.out.println(ex.toString());
+                        }
+                        if(serial > arrayList.size()){
+                            JOptionPane.showMessageDialog(null, "Car not found!!!");
+                            chk = false;
+                            delete_field.setText("");
+                        }
+                    }catch (Exception z){
+                        JOptionPane.showMessageDialog(null, "Enter valid Integer!!!");
+                        delete_field.setText("");
+                    }
+                    if(chk) {
+                        try {
+                            String query = "delete from cars where car_id = ?";
+                            PreparedStatement pst = con.prepareStatement(query);
+                            pst.setString(1, String.valueOf(car_id));
+                            pst.executeUpdate();
+                            JOptionPane.showMessageDialog(null, "Car deleted!!!");
+                            frame.dispose();
+                            Admin_Manage_Car_Board admin_manage_car_board = new Admin_Manage_Car_Board();
+                        } catch (Exception ex) {
+                            System.out.println(ex.toString());
+                        }
+                    }
+                }
+            }
+
             if(e.getSource() == back_button){
                 frame.dispose();
                 Admin_Manage_Exchange_Board admin_manage_exchange_board = new Admin_Manage_Exchange_Board();

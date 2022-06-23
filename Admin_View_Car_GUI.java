@@ -62,7 +62,7 @@ public class Admin_View_Car_GUI {
             ResultSet result = st.executeQuery("select * from cars");
             int i = 1;
             while(result.next()){
-                info_area.append(i +".Model: " + result.getString(2) + "  Mileage: " + result.getInt(3) + "  Engine: " + result.getString(4)
+                info_area.append(i +".Model: " + result.getString(2) + "  Mileage: " + result.getString(3) + "  Engine: " + result.getString(4)
                         + "  Price: " + result.getInt(6) + "  Quantity: " + result.getInt(7) + "\n");
                 i++;
             }

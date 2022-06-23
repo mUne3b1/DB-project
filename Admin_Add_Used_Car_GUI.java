@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
+import java.util.Random;
 
 public class Admin_Add_Used_Car_GUI {
     private JFrame frame;
@@ -21,6 +23,8 @@ public class Admin_Add_Used_Car_GUI {
     private JTextField car_company_field;
     private JTextField car_engine_field;
     private JTextField car_quantity_field;
+    private String combo_default = "man1";
+    private int man_id = 0;
 
 
 
@@ -83,9 +87,6 @@ public class Admin_Add_Used_Car_GUI {
         car_quantity_field = new JTextField();
         car_quantity_field.setBounds(400, 490, 350, 40);
 
-
-
-
         back_button = new JButton("Back");
         back_button.setBounds(100, 630, 180, 60);
         back_button.setBackground(Color.CYAN);
@@ -131,24 +132,87 @@ public class Admin_Add_Used_Car_GUI {
         frame.setResizable(false);
     }
     class Handler implements ActionListener {
-
+        private int id;
+        private Random random;
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(e.getSource() == add_button){
+            boolean chk = true;
 
-            }
-            if(e.getSource() == clear_button){
-                car_model_field.setText("");
-                car_company_field.setText("");
-                car_engine_field.setText("");
-                car_price_field.setText("");
-                car_mileage_field.setText("");
-                car_quantity_field.setText("");
-            }
-            if(e.getSource() == back_button){
-                frame.dispose();
-                Admin_Manage_Used_Vehicle_Board admin_manage_used_vehicle_board = new Admin_Manage_Used_Vehicle_Board();
-            }
-        }
-    }
-}
+            String model = car_model_field.getText();
+            int mileage = Integer.parseInt(car_mileage_field.getText());
+            int price = Integer.parseInt(car_price_field.getText());
+            String engine = car_engine_field.getText();
+            int quantity = Integer.parseInt(car_quantity_field.getText());
+
+            random = new Random();
+            id = random.nextInt(10000)+1;
+
+                if (e.getSource() == add_button) {
+
+                    try {
+                        Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "Muneeb", "you");
+                        Statement st = con.createStatement();
+                        ResultSet result = st.executeQuery("select * from manufacturer");
+                        while (result.next() && !combo_default.equals(result.getString(2))) {
+                        }
+                        man_id = Integer.parseInt(result.getString(1));
+
+                        con.close();
+                    } catch (Exception ex) {
+                        System.out.println(ex.toString());
+                    }
+                    if (car_model_field.getText().isEmpty() || car_mileage_field.getText().isEmpty() || car_price_field.getText().isEmpty() ||
+                            car_company_field.getText().isEmpty() || car_engine_field.getText().isEmpty() || car_quantity_field.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Fields should not be empty!!!");
+                    } else {
+                        int ad_id = 12;
+
+                        try {
+                            Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "Muneeb", "you");
+                            Statement st = con.createStatement();
+                            ResultSet result = st.executeQuery("select * from used_vehicles");
+                            while (result.next()) {
+                                if (id == result.getInt(1)) {
+                                    JOptionPane.showMessageDialog(null, "Car already exists!!!");
+                                    frame.dispose();
+                                    Admin_Manage_Used_Vehicle_Board admin_manage_used_vehicle_board = new Admin_Manage_Used_Vehicle_Board();
+                                    chk = false;
+                                }
+                            }
+                            if (chk) {
+                                String query = "insert into cars(car_id, car_model, car_mileage, car_engine, car_price, car_quantity, manufacturer_manufacturer_id, admin_admin_id) values(?, ?, ?, ?, ?, ?, ?, ?)";
+                                PreparedStatement pst = con.prepareStatement(query);
+                                pst.setInt(1, id);
+                                pst.setString(2, model);
+                                pst.setInt(3, mileage);
+                                pst.setString(4, engine);
+                                pst.setInt(5, price);
+                                pst.setInt(6, quantity);
+                                pst.setInt(7, man_id);
+                                pst.setInt(8, ad_id);
+                                pst.executeUpdate();
+                                JOptionPane.showMessageDialog(null, "Car added successful!!!");
+                                con.close();
+                                frame.dispose();
+                                Admin_Manage_Used_Vehicle_Board admin_manage_used_vehicle_board = new Admin_Manage_Used_Vehicle_Board();
+                            }
+                        } catch (Exception ex) {
+                            System.out.println(ex.toString());
+                        }
+                    }
+                }
+
+
+                if (e.getSource() == clear_button) {
+                    car_model_field.setText("");
+                    car_company_field.setText("");
+                    car_engine_field.setText("");
+                    car_price_field.setText("");
+                    car_mileage_field.setText("");
+                    car_quantity_field.setText("");
+                }
+                if (e.getSource() == back_button) {
+                    frame.dispose();
+                    Admin_Manage_Used_Vehicle_Board admin_manage_used_vehicle_board = new Admin_Manage_Used_Vehicle_Board();
+                }
+            }}}

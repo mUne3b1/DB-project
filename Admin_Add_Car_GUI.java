@@ -176,7 +176,6 @@ public class Admin_Add_Car_GUI {
 
                     con.close();
                 }catch (Exception ex){
-                    System.out.println(ex.toString());
                 }
 
                 if(car_model_field.getText().isEmpty() || car_mileage_field.getText().isEmpty() || car_price_field.getText().isEmpty() ||

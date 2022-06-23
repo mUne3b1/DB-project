@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 import java.sql.*;
 import java.util.Random;
 
@@ -23,7 +24,7 @@ public class Admin_Add_Bike_GUI {
     private JTextField bike_weight_field;
     private JTextField bike_engine_field;
     private JTextField bike_quantity_field;
-
+    private JComboBox manufacturer_combo;
 
 
     private JButton add_button;
@@ -108,6 +109,17 @@ public class Admin_Add_Bike_GUI {
         add_button.setFont(new Font("Aerial", Font.BOLD, 20));
         add_button.addActionListener(new Handler());
 
+        String[] manu = {"man1", "man2", "man3", "man4"};
+        manufacturer_combo = new JComboBox<>(manu);
+        manufacturer_combo.setBounds(800, 494, 120, 35);
+        manufacturer_combo.addItemListener(e -> {
+            if(e.getStateChange()== ItemEvent.SELECTED){
+                combo_default = (String)e.getItem();
+
+
+            }
+        });
+
         panel.add(main_label);
 
         panel.add(bike_model_label);
@@ -118,11 +130,12 @@ public class Admin_Add_Bike_GUI {
         panel.add(bike_mileage_label);
         panel.add(bike_engine_field);
         panel.add(bike_engine_label);
+
         panel.add(bike_price_field);
         panel.add(bike_price_label);
         panel.add(bike_quantity_field);
         panel.add(bike_quantity_label);
-
+        panel.add(manufacturer_combo);
         panel.add(back_button);
         panel.add(clear_button);
         panel.add(add_button);
@@ -154,13 +167,14 @@ public class Admin_Add_Bike_GUI {
                 try{
                     Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","Muneeb","you");
                     Statement st = con.createStatement();
+                    int num = 0;
                     ResultSet result = st.executeQuery("select * from manufacturer");
                     while(result.next() && !combo_default.equals(result.getString(2))){
+                        num = result.getInt(1);
                     }
-                    man_id = Integer.parseInt(result.getString(1));
+                    man_id = num;
                     con.close();
                 }catch (Exception ex){
-                    System.out.println(ex.toString());
                 }
                 if(bike_model_field.getText().isEmpty() || bike_mileage_field.getText().isEmpty() || bike_price_field.getText().isEmpty() ||
                         bike_weight_field.getText().isEmpty() || bike_engine_field.getText().isEmpty() || bike_quantity_field.getText().isEmpty()){
@@ -184,16 +198,16 @@ public class Admin_Add_Bike_GUI {
                             }
                         }
                         if(chk){
-                            String query = "insert into bike(bike_id, bike_model, bike_weight, bike_mileage, bike_engine, bike_price, bike_quantity, manufacturer_manufacturer_id, admin_admin_id) values(?, ?, ?, ?, ?, ?, ?, ?)";
+                            String query = "insert into bike(bike_id, bike_model, weight, mileage, engine, price, quantity, manufacturer_manufacturer_id, admin_admin_id) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
                             PreparedStatement pst = con.prepareStatement(query);
                             pst.setInt(1, id);
                             pst.setString(2, model);
                             pst.setInt(3, weight);
                             pst.setInt(4, mileage);
                             pst.setString(5, engine);
-                            pst.setInt(6, price);
-                            pst.setInt(7, quantity);
-                            pst.setInt(8, man_id);
+                            pst.setInt(6, man_id);
+                            pst.setInt(7, price);
+                            pst.setInt(8, quantity);
                             pst.setInt(9, ad_id);
                             pst.executeUpdate();
                             JOptionPane.showMessageDialog(null, "Bike added successful!!!");
